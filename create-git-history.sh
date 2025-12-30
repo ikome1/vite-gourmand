@@ -82,13 +82,16 @@ if ! git rev-parse --verify HEAD >/dev/null 2>&1; then
     git commit -m "Initial commit - Démarrage du projet"
 fi
 
-# Créer la branche main
+# Créer la branche main si elle n'existe pas
 if ! git show-ref --verify --quiet refs/heads/main; then
     git checkout -b main
-    git checkout -b dev
+fi
+
+# Basculer sur dev (créer si n'existe pas)
+if git show-ref --verify --quiet refs/heads/dev; then
+    git checkout dev
 else
-    # Si main existe, créer ou basculer sur dev
-    git checkout -b dev 2>/dev/null || git checkout dev
+    git checkout -b dev
 fi
 
 # Étape 3: Configurer le remote GitHub
