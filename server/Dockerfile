@@ -18,9 +18,13 @@ COPY . .
 # Créer le dossier data s'il n'existe pas
 RUN mkdir -p data
 
+# Copier le script d'initialisation
+COPY init.sh /app/init.sh
+RUN chmod +x /app/init.sh
+
 # Exposer le port Express
 EXPOSE 4000
 
 # Commande par défaut (peut être surchargée par docker-compose)
-CMD ["npm", "run", "dev"]
+CMD ["/app/init.sh"]
 
