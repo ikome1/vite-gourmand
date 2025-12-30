@@ -5,6 +5,7 @@ import { authenticate, destroySession, loginUser, registerUser, serializeUser } 
 import { createMenu, getMenu, listMenus, updateMenuStock } from './menuService.js';
 import { createOrder } from './orderService.js';
 import { query, queryOne } from './db.js';
+import { connectMongoDB, logActivity } from './db/mongodb.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -151,13 +152,13 @@ const loginSchema = z.object({
   password: z.string().min(1),
 });
 
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', async (req, res) => {
   const parseResult = loginSchema.safeParse(req.body);
   if (!parseResult.success) {
     return res.status(400).json({ message: 'Données invalides.' });
   }
 
-  const result = loginUser(parseResult.data);
+  const result = await loginUser(parseResult.data);
   if (!result.success) {
     return res.status(result.status ?? 401).json({ message: result.message });
   }
@@ -256,6 +257,39 @@ app.get('/api/orders', (req, res) => {
   }));
 
   res.json({ data: orders });
+});
+
+// Initialiser MongoDB (optionnel, ne bloque pas si non disponible)
+connectMongoDB().catch(() => {
+  console.log('MongoDB optionnel - utilisation de SQLite uniquement');
+});
+
+// Route pour les logs d'activité (NoSQL)
+app.get('/api/logs', async (req, res) => {
+  if (!req.user || !['administrateur', 'employe'].includes(req.user.role)) {
+    return res.status(403).json({ message: 'Accès refusé.' });
+  }
+
+  try {
+    const { getActivityLogs } = await import('./db/mongodb.js');
+    const logs = await getActivityLogs({}, 50);
+    res.json({ data: logs });
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur lors de la récupération des logs.' });
+  }
+});
+
+// Middleware pour logger les actions importantes
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.user) {
+    logActivity({
+      userId: req.user.id,
+      action: req.method,
+      endpoint: req.path,
+      userRole: req.user.role,
+    }).catch(() => {}); // Ne pas bloquer si MongoDB n'est pas disponible
+  }
+  next();
 });
 
 app.listen(PORT, () => {

@@ -61,7 +61,7 @@ export function registerUser({ firstName, lastName, email, phone, address, passw
   return { success: true, user: serializeUser(user), token };
 }
 
-export function loginUser({ email, password }) {
+export async function loginUser({ email, password }) {
   const user = queryOne('SELECT * FROM users WHERE email = ?', [email.toLowerCase()]);
   if (!user) {
     return { success: false, status: 401, message: 'Identifiants invalides.' };
@@ -72,6 +72,21 @@ export function loginUser({ email, password }) {
   }
 
   const token = createSession(user.id);
+  
+  // Logger la connexion dans MongoDB (NoSQL)
+  try {
+    const { logActivity } = await import('./db/mongodb.js');
+    logActivity({
+      userId: user.id,
+      action: 'LOGIN',
+      endpoint: '/api/auth/login',
+      userRole: user.role,
+      success: true,
+    }).catch(() => {}); // Ne pas bloquer si MongoDB n'est pas disponible
+  } catch (error) {
+    // MongoDB optionnel
+  }
+
   return { success: true, user: serializeUser(user), token };
 }
 

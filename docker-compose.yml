@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  # MongoDB (NoSQL - optionnel)
+  mongodb:
+    image: mongo:7
+    container_name: vite-gourmand-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - vite-gourmand-network
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=vite-gourmand
+
   # Backend API
   server:
     build:
@@ -16,10 +30,13 @@ services:
       - NODE_ENV=development
       - PORT=4000
       - ALLOWED_ORIGINS=http://localhost:5173
+      - MONGODB_URI=mongodb://mongodb:27017
     networks:
       - vite-gourmand-network
     restart: unless-stopped
     command: /app/init.sh
+    depends_on:
+      - mongodb
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4000/health"]
       interval: 10s
@@ -51,4 +68,7 @@ services:
 networks:
   vite-gourmand-network:
     driver: bridge
+
+volumes:
+  mongodb_data:
 
