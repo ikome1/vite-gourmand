@@ -1,0 +1,18 @@
+<svg width="320" height="220" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Menu Pâques illustration</title>
+  <defs>
+    <linearGradient id="paques" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9ADBC7" />
+      <stop offset="100%" stop-color="#4CB5A3" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" rx="28" fill="url(#paques)" />
+  <g fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round">
+    <ellipse cx="100" cy="110" rx="26" ry="32" />
+    <ellipse cx="150" cy="120" rx="22" ry="30" />
+    <path d="M210 150 Q230 120 250 150" />
+    <path d="M230 120 Q250 90 270 120" />
+  </g>
+  <circle cx="70" cy="60" r="12" fill="#ffffff" opacity="0.4" />
+</svg>
+

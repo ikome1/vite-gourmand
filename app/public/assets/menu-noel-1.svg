@@ -1,0 +1,17 @@
+<svg width="320" height="220" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Menu Noël illustration 1</title>
+  <defs>
+    <linearGradient id="noelGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BF1E2E" />
+      <stop offset="100%" stop-color="#E65040" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" rx="28" fill="url(#noelGradient)" />
+  <g stroke="#ffffff" stroke-width="4" stroke-linecap="round">
+    <path d="M60 70 L90 110 L60 110 L90 150 L60 150" fill="none" />
+    <circle cx="200" cy="100" r="36" fill="none" />
+    <path d="M200 64 C220 64 236 80 236 100 C236 120 220 136 200 136" fill="none" />
+    <path d="M120 80 Q140 100 120 120 Q140 140 120 160" fill="none" />
+  </g>
+</svg>
+

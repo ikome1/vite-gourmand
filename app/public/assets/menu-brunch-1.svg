@@ -1,0 +1,17 @@
+<svg width="320" height="220" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Menu Brunch illustration 1</title>
+  <defs>
+    <linearGradient id="brunch1" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#F7D26C" />
+      <stop offset="100%" stop-color="#F79F1F" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" rx="28" fill="url(#brunch1)" />
+  <g fill="none" stroke="#8F4E16" stroke-width="6" stroke-linecap="round">
+    <path d="M90 150 C110 100 160 100 180 150" />
+    <path d="M120 80 Q160 60 200 80" />
+  </g>
+  <circle cx="240" cy="120" r="32" fill="#fff6e3" />
+  <circle cx="240" cy="120" r="18" fill="#F79F1F" />
+</svg>
+

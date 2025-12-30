@@ -1,0 +1,16 @@
+<svg width="320" height="220" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Menu générique illustration</title>
+  <defs>
+    <linearGradient id="generic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D9D9D9" />
+      <stop offset="100%" stop-color="#B6B6B6" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" rx="28" fill="url(#generic)" />
+  <g fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round">
+    <path d="M70 150 H250" />
+    <path d="M70 120 H210" />
+    <path d="M70 90 H180" />
+  </g>
+</svg>
+

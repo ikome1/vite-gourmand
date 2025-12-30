@@ -1,0 +1,16 @@
+<svg width="320" height="220" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Menu Vegan illustration</title>
+  <defs>
+    <linearGradient id="vegan" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#467C5C" />
+      <stop offset="100%" stop-color="#A0D57A" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" rx="28" fill="url(#vegan)" />
+  <path d="M80 150 C120 90 200 90 240 150" fill="none" stroke="#f3ffe8" stroke-width="6" stroke-linecap="round" />
+  <path d="M110 110 Q140 70 170 110" fill="none" stroke="#f3ffe8" stroke-width="6" stroke-linecap="round" />
+  <path d="M180 110 Q210 70 240 110" fill="none" stroke="#f3ffe8" stroke-width="6" stroke-linecap="round" />
+  <circle cx="120" cy="70" r="16" fill="#f3ffe8" opacity="0.6" />
+  <circle cx="220" cy="60" r="12" fill="#f3ffe8" opacity="0.6" />
+</svg>
+

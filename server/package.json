@@ -1,0 +1,23 @@
+{
+  "name": "vite-gourmand-server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "seed": "node src/seed.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.0",
+    "cors": "2.8.5",
+    "express": "4.21.2",
+    "mongodb": "^7.0.0",
+    "nanoid": "5.0.7",
+    "nodemailer": "^7.0.12",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "nodemon": "3.1.9"
+  }
+}

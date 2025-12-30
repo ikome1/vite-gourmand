@@ -1,0 +1,10 @@
+Charte hygiène & sécurité — Vite & Gourmand
+Version démonstration FastDev · Janvier 2025
+
+- Tous les produits sont tracés et étiquetés avec la date de production.
+- La chaîne du froid est respectée grâce aux contenants isothermes fournis.
+- Les collaborateurs sont formés chaque année aux normes HACCP.
+- Les allergènes sont listés sur chaque fiche menu.
+
+Document non contractuel utilisé pour la présentation du projet web.
+
