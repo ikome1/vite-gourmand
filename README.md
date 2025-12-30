@@ -1,53 +1,81 @@
-# Projet « Vite & Gourmand »
+# Vite & Gourmand - Application de Traiteur Événementiel
 
-Ce dépôt contient l’application complète développée pour Julie & José (traiteur Vite & Gourmand) dans le cadre de la mission FastDev. Il rassemble :
+Application web complète pour la gestion d'un service de traiteur événementiel.
 
-- **`app/`** : front-end React + TypeScript + Vite, interface publique et espace pro.
-- **`server/`** : back-end Express + SQLite offrant l’API REST consommée par le front.
+## 🚀 Démarrage Rapide avec Docker (Recommandé)
 
-## Démarrage rapide
+### Prérequis
+- Docker et Docker Compose installés
 
-1. **Installer et lancer le serveur** :
-   ```bash
-   cd server
-   npm install
-   npm run seed   # initialise la base SQLite avec menus, comptes, avis
-   npm run dev    # http://localhost:4000
-   ```
+### Lancer le projet
 
-2. **Installer et lancer le front** :
-   ```bash
-   cd ../app
-   npm install
-   cp .env.example .env   # vérifier l’URL de l’API, par défaut http://localhost:4000
-   npm run dev             # http://localhost:5173
-   ```
+```bash
+# 1. Lancer tous les services
+docker compose up --build
 
-Les deux README détaillés sont disponibles ici :
+# 2. Attendre que les services démarrent (30 secondes environ)
 
-- [Documentation front-end](app/README.md)
-- [Documentation API](server/README.md)
-
-## Comptes de démonstration
-
-- Administrateur : `julie@vite-gourmand.fr` / `Admin2025!`
-- Employé : `jose@vite-gourmand.fr` / `Employe2025!`
-
-## Arborescence
-
-```
-Vite & Gourmand /
-├── app/           # Interface web (React + Vite)
-├── server/        # API Express + SQLite
-├── presentation.md  # Présentation générale du projet
-├── fonctionnement.md # Explications front/back détaillées
-└── README.md      # ce document
+# 3. Accéder à l'application
+# Frontend: http://localhost:5173
+# Backend: http://localhost:4000
 ```
 
-## Conformité
+La base de données est automatiquement initialisée au premier démarrage.
 
-- Toutes les chaînes visibles (front & back) sont en français.
-- Mentions légales, CGV, RGPD et avis vérifiés sont intégrés conformément au cahier des charges.
-- La documentation complète est disponible dans `presentation.md`, `fonctionnement.md`, `installer.md`, `app/README.md` et `server/README.md`.
+### Arrêter le projet
 
-Pour aller plus loin, se référer aux fichiers README de chaque sous-projet.
+```bash
+docker compose down
+```
+
+## 📋 Comptes de démonstration
+
+- **Administrateur** :
+  - Email : `julie@vite-gourmand.fr`
+  - Mot de passe : `Admin2025!`
+
+- **Employé** :
+  - Email : `jose@vite-gourmand.fr`
+  - Mot de passe : `Employe2025!`
+
+## 🛠️ Démarrage sans Docker
+
+### Backend
+
+```bash
+cd server
+npm install
+npm run seed  # Initialiser la base de données
+npm run dev   # Démarrer sur http://localhost:4000
+```
+
+### Frontend
+
+```bash
+cd app
+npm install
+npm run dev   # Démarrer sur http://localhost:5173
+```
+
+## 📚 Documentation
+
+- [Guide Docker complet](README_DOCKER.md)
+- [Fonctionnement du projet](fonctionnement.md)
+
+## 🏗️ Structure
+
+```
+vite-gourmand/
+├── app/          # Frontend React + Vite + TypeScript
+├── server/       # Backend Express + SQLite
+└── docker-compose.yml
+```
+
+## ✅ Fonctionnalités
+
+- ✅ Affichage des menus avec filtres
+- ✅ Système d'authentification (utilisateur, employé, administrateur)
+- ✅ Gestion des commandes
+- ✅ Espace professionnel
+- ✅ Page de contact
+- ✅ Témoignages clients
