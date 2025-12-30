@@ -1,73 +1,13 @@
 # Projet « Vite & Gourmand »
 
-Ce dépôt contient l’application complète développée pour Julie & José (traiteur Vite & Gourmand) dans le cadre de la mission FastDev. Il rassemble :
+Application de traiteur événementiel développée pour Julie & José.
 
-- **`app/`** : front-end React + TypeScript + Vite, interface publique et espace pro.
-- **`server/`** : back-end Express + SQLite offrant l’API REST consommée par le front.
+## Structure
+- `app/` : Front-end React + TypeScript + Vite
+- `server/` : Back-end Express + SQLite
 
-## Démarrage rapide
-
-### 🐳 Méthode Docker (Recommandée)
-
-**Prérequis** : Docker et Docker Compose installés
-
+## Installation
 ```bash
-# 1. Lancer l'application complète
-docker compose up --build
-
-# 2. Initialiser la base de données (première fois uniquement)
-docker compose exec server npm run seed
-
-# 3. Accéder à l'application
-# Frontend : http://localhost:5173
-# Backend API : http://localhost:4000
+cd app && npm install
+cd server && npm install
 ```
-
-📖 **Voir [DOCKER.md](DOCKER.md) pour plus de détails sur Docker**
-
-### 💻 Méthode traditionnelle (sans Docker)
-
-1. **Installer et lancer le serveur** :
-   ```bash
-   cd server
-   npm install
-   npm run seed   # initialise la base SQLite avec menus, comptes, avis
-   npm run dev    # http://localhost:4000
-   ```
-
-2. **Installer et lancer le front** :
-   ```bash
-   cd ../app
-   npm install
-   cp .env.example .env   # vérifier l'URL de l'API, par défaut http://localhost:4000
-   npm run dev             # http://localhost:5173
-   ```
-
-Les deux README détaillés sont disponibles ici :
-
-- [Documentation front-end](app/README.md)
-- [Documentation API](server/README.md)
-
-## Comptes de démonstration
-
-- Administrateur : `julie@vite-gourmand.fr` / `Admin2025!`
-- Employé : `jose@vite-gourmand.fr` / `Employe2025!`
-
-## Arborescence
-
-```
-Vite & Gourmand /
-├── app/           # Interface web (React + Vite)
-├── server/        # API Express + SQLite
-├── presentation.md  # Présentation générale du projet
-├── fonctionnement.md # Explications front/back détaillées
-└── README.md      # ce document
-```
-
-## Conformité
-
-- Toutes les chaînes visibles (front & back) sont en français.
-- Mentions légales, CGV, RGPD et avis vérifiés sont intégrés conformément au cahier des charges.
-- La documentation complète est disponible dans `presentation.md`, `fonctionnement.md`, `installer.md`, `app/README.md` et `server/README.md`.
-
-Pour aller plus loin, se référer aux fichiers README de chaque sous-projet.
