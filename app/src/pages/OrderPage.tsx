@@ -1,9 +1,8 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import type { FormEvent } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import type { Menu } from '../types/menu';
-import { calculateOrderPricePreview } from '../utils/priceCalculator';
 
 interface OrderFormState {
   eventDate: string;
@@ -194,20 +193,8 @@ export function OrderPage() {
             <strong>Prix de base :</strong>{' '}
             {menu.basePrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}
           </li>
-          {menu.pricePerAdditionalGuest && (
-            <li>
-              <strong>Prix par convive supplémentaire :</strong>{' '}
-              {menu.pricePerAdditionalGuest.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}
-            </li>
-          )}
         </ul>
       </div>
-
-      <PriceCalculationDisplay
-        menu={menu}
-        guests={formState.guests}
-        deliveryAddress={formState.deliveryAddress}
-      />
 
       <section className="order-page__form">
         <h2>Informations logistiques</h2>
@@ -273,109 +260,6 @@ export function OrderPage() {
           </p>
         )}
       </section>
-    </div>
-  );
-}
-
-interface PriceCalculationDisplayProps {
-  menu: Menu;
-  guests: number;
-  deliveryAddress: string;
-}
-
-function PriceCalculationDisplay({ menu, guests, deliveryAddress }: PriceCalculationDisplayProps) {
-  const priceCalculation = useMemo(() => {
-    return calculateOrderPricePreview(
-      menu.basePrice,
-      menu.pricePerAdditionalGuest || 0,
-      menu.minimumGuests,
-      guests,
-      deliveryAddress || ''
-    );
-  }, [menu, guests, deliveryAddress]);
-
-  if (guests < menu.minimumGuests) {
-    return null;
-  }
-
-  return (
-    <div className="order-page__price-calculation">
-      <h2>Récapitulatif du prix</h2>
-      <div className="price-breakdown">
-        <div className="price-line">
-          <span>Prix de base ({menu.minimumGuests} personnes) :</span>
-          <span>{menu.basePrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</span>
-        </div>
-        {priceCalculation.breakdown.additionalGuests > 0 && (
-          <>
-            <div className="price-line">
-              <span>
-                {priceCalculation.breakdown.additionalGuests} personne(s) supplémentaire(s) ×{' '}
-                {(menu.pricePerAdditionalGuest || 0).toLocaleString('fr-FR', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}
-                :
-              </span>
-              <span>
-                {priceCalculation.breakdown.additionalPrice.toLocaleString('fr-FR', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}
-              </span>
-            </div>
-            <div className="price-line price-line--subtotal">
-              <span>Sous-total menu :</span>
-              <span>
-                {priceCalculation.menuPrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}
-              </span>
-            </div>
-          </>
-        )}
-        {priceCalculation.discountAmount > 0 && (
-          <div className="price-line price-line--discount">
-            <span>
-              Réduction {priceCalculation.breakdown.discountPercentage}% (5+ personnes supplémentaires) :
-            </span>
-            <span>
-              -{priceCalculation.discountAmount.toLocaleString('fr-FR', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </span>
-          </div>
-        )}
-        <div className="price-line price-line--subtotal">
-          <span>Prix menu après réduction :</span>
-          <span>
-            {priceCalculation.menuPriceAfterDiscount.toLocaleString('fr-FR', {
-              style: 'currency',
-              currency: 'EUR',
-            })}
-          </span>
-        </div>
-        <div className="price-line">
-          <span>Livraison :</span>
-          <span>
-            {priceCalculation.deliveryPrice === 0
-              ? 'Gratuite (Bordeaux)'
-              : priceCalculation.deliveryPrice.toLocaleString('fr-FR', {
-                  style: 'currency',
-                  currency: 'EUR',
-                })}
-          </span>
-        </div>
-        <div className="price-line price-line--total">
-          <span>
-            <strong>Total :</strong>
-          </span>
-          <span>
-            <strong>
-              {priceCalculation.totalPrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}
-            </strong>
-          </span>
-        </div>
-      </div>
     </div>
   );
 }

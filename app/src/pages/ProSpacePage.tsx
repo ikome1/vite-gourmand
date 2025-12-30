@@ -114,19 +114,11 @@ export function ProSpacePage() {
           <NavLink to="/menus" className="app-button app-button--ghost">
             Menus
           </NavLink>
-          <NavLink to="/gestion-commandes" className="app-button">
-            Gérer les commandes
-          </NavLink>
-          <NavLink to="/gestion-avis" className="app-button app-button--ghost">
-            Valider les avis
-          </NavLink>
-          {currentUser.role === 'administrateur' && (
-            <NavLink to="/admin" className="app-button app-button--primary">
-              Administration
-            </NavLink>
-          )}
           <NavLink to="/contact" className="app-button app-button--ghost">
             Contact
+          </NavLink>
+          <NavLink to="/mentions-legales" className="app-button app-button--ghost">
+            Mentions légales
           </NavLink>
         </div>
       </section>
@@ -168,14 +160,6 @@ export function ProSpacePage() {
                       }
                       onBlur={() => handleStockBlur(menu.id)}
                     />
-                  </td>
-                  <td>
-                    <NavLink
-                      to={`/menus/${menu.id}/modifier`}
-                      className="app-button app-button--ghost app-button--small"
-                    >
-                      Modifier
-                    </NavLink>
                   </td>
                 </tr>
               ))}

@@ -4,61 +4,35 @@ import type { FormEvent } from 'react';
 interface FormState {
   name: string;
   email: string;
-  title: string;
+  phone: string;
+  eventDate: string;
+  guests: string;
   message: string;
   consent: boolean;
 }
 
-const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
-
 const initialState: FormState = {
   name: '',
   email: '',
-  title: '',
+  phone: '',
+  eventDate: '',
+  guests: '',
   message: '',
   consent: false,
 };
 
 export function ContactPage() {
   const [formState, setFormState] = useState<FormState>(initialState);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [status, setStatus] = useState<'idle' | 'success'>('idle');
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!formState.consent) {
-      setErrorMessage('Merci de consentir au traitement de vos données afin que nous puissions vous répondre.');
+      alert('Merci de consentir au traitement de vos données afin que nous puissions vous répondre.');
       return;
     }
-
-    setStatus('loading');
-    setErrorMessage(null);
-
-    try {
-      const response = await fetch(`${API_BASE}/api/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formState.name,
-          email: formState.email,
-          title: formState.title,
-          message: formState.message,
-        }),
-      });
-
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        throw new Error(data.message ?? 'Erreur lors de l\'envoi du message.');
-      }
-
-      setStatus('success');
-      setFormState(initialState);
-    } catch (err) {
-      setStatus('error');
-      setErrorMessage((err as Error).message ?? 'Erreur lors de l\'envoi du message.');
-    }
+    setStatus('success');
+    setFormState(initialState);
   };
 
   return (
@@ -95,17 +69,16 @@ export function ContactPage() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="contact-title">Sujet</label>
+              <label htmlFor="contact-phone">Téléphone</label>
               <input
-                id="contact-title"
-                type="text"
+                id="contact-phone"
+                type="tel"
                 required
-                value={formState.title}
-                onChange={(event) => setFormState((prev) => ({ ...prev, title: event.target.value }))}
-                placeholder="Objet de votre demande"
+                value={formState.phone}
+                onChange={(event) => setFormState((prev) => ({ ...prev, phone: event.target.value }))}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group form-group--inline">
               <div>
                 <label htmlFor="contact-date">Date estimée</label>
                 <input

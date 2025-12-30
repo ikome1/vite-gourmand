@@ -1,7 +1,6 @@
 import { createHash } from 'node:crypto';
 import { nanoid } from 'nanoid';
 import { queryOne, run } from './db.js';
-import { sendWelcomeEmail } from './utils/emailService.js';
 
 const sessions = new Map();
 
@@ -44,7 +43,7 @@ export function authenticate(req, res, next) {
   next();
 }
 
-export async function registerUser({ firstName, lastName, email, phone, address, password }) {
+export function registerUser({ firstName, lastName, email, phone, address, password }) {
   const existing = queryOne('SELECT id FROM users WHERE email = ?', [email.toLowerCase()]);
   if (existing) {
     return { success: false, status: 409, message: 'Un compte existe déjà avec cette adresse e-mail.' };
@@ -59,10 +58,6 @@ export async function registerUser({ firstName, lastName, email, phone, address,
 
   const user = queryOne('SELECT * FROM users WHERE id = ?', [id]);
   const token = createSession(id);
-
-  // Envoyer un email de bienvenue
-  await sendWelcomeEmail(email, firstName);
-
   return { success: true, user: serializeUser(user), token };
 }
 
